@@ -17,7 +17,7 @@ const navigation = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(true)
+    
 
   const { theme, toggleTheme } = useTheme()
 
@@ -35,9 +35,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', darkMode)
-  }, [darkMode])
+
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
@@ -136,16 +134,18 @@ export function Navbar() {
           {/* Mobile actions */}
           <div className="flex items-center gap-2 md:hidden">
             <button
-              type="button"
-              onClick={() => setDarkMode((value) => !value)}
-              className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)]"
-              aria-label="Toggle theme"
-            >
-              {darkMode ? (
-                <Sun size={18} />
-              ) : (
-                <Moon size={18} />
-              )}
+                type="button"
+                onClick={toggleTheme}
+                className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)]"
+                aria-label={`Switch to ${
+                    theme === 'dark' ? 'light' : 'dark'
+                } theme`}
+                >
+                {theme === 'dark' ? (
+                    <Sun size={18} />
+                ) : (
+                    <Moon size={18} />
+                )}
             </button>
 
             <button
